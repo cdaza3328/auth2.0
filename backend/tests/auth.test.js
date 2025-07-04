@@ -1,6 +1,7 @@
 const request = require("supertest");
 const app = require("../app");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose"); // ← importar mongoose
 
 describe("Ruta protegida", () => {
   it("debería denegar acceso sin token", async () => {
@@ -14,5 +15,10 @@ describe("Ruta protegida", () => {
       .get("/protected")
       .set("Authorization", `Bearer ${token}`);
     expect(res.statusCode).toBe(200);
+  });
+
+  afterAll(async () => {
+    // Cierra la conexión a MongoDB para evitar warnings de Jest
+    await mongoose.connection.close();
   });
 });

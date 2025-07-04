@@ -3,10 +3,15 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/User");
 require("dotenv").config();
 
+// ✅ Usar valores "falsos" por defecto en entorno de test
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "fake-client-id";
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || "fake-client-secret";
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:8000";
+
 passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `${process.env.SERVER_URL}/auth/google/callback`
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: `${SERVER_URL}/auth/google/callback`
   },
   async (accessToken, refreshToken, profile, done) => {
     try {
@@ -26,6 +31,10 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id);
-  done(null, user);
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
 });

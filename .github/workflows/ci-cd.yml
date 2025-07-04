@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    env:  # ✅ VARIABLES DISPONIBLES EN TODO EL JOB
+    env:
       NODE_ENV: test
       MONGODB_URI: mongodb://localhost:27017/test-db
       JWT_SECRET: fake-jwt
@@ -51,6 +51,22 @@ jobs:
       - name: Frontend - Ejecutar pruebas
         run: npm test -- --watchAll=false
         working-directory: frontend
+
+      # ❌ Estas dos secciones ya no son necesarias porque Cypress usará el frontend en Vercel
+      # - name: Frontend - Iniciar servidor en segundo plano
+      #   run: npm start &
+      #   working-directory: frontend
+
+      # - name: Esperar a que el frontend esté disponible
+      #   run: |
+      #     n=0
+      #     until [ $n -ge 10 ]
+      #     do
+      #       curl -s http://localhost:3000 && break
+      #       n=$((n+1))
+      #       echo "⏳ Esperando que el frontend arranque..."
+      #       sleep 5
+      #     done
 
       - name: Cypress E2E Tests
         run: npx cypress run

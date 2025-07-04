@@ -1,6 +1,6 @@
 describe('Flujo de autenticación', () => {
   it('debería redirigir al login si no hay token', () => {
-    cy.visit('http://localhost:3000');
+    cy.visit('https://auth2-0.vercel.app');
     cy.url().should('include', '/login');
   });
 });

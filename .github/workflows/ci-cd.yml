@@ -20,32 +20,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Ver estructura del proyecto
+        run: ls -R
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Backend - Install dependencies
-        run: |
-          cd backend
-          npm install
+      - name: Backend - Instalar dependencias
+        run: npm install
+        working-directory: auth2.0/backend
 
-      - name: Backend - Run tests
-        run: |
-          cd backend
-          npm test
+      - name: Backend - Ejecutar pruebas
+        run: npm test
+        working-directory: auth2.0/backend
 
-      - name: Frontend - Install dependencies
-        run: |
-          cd frontend
-          npm install
+      - name: Frontend - Instalar dependencias
+        run: npm install
+        working-directory: auth2.0/frontend
 
-      - name: Frontend - Run tests
-        run: |
-          cd frontend
-          npm test -- --watchAll=false
+      - name: Frontend - Ejecutar pruebas
+        run: npm test -- --watchAll=false
+        working-directory: auth2.0/frontend
 
       - name: Cypress E2E Tests
-        run: |
-          npx cypress run
-        working-directory: frontend
+        run: npx cypress run
+        working-directory: auth2.0/frontend

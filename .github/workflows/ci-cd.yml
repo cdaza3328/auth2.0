@@ -30,20 +30,20 @@ jobs:
 
       - name: Backend - Instalar dependencias
         run: npm install
-        working-directory: auth2.0/backend
+        working-directory: backend
 
       - name: Backend - Ejecutar pruebas
         run: npm test
-        working-directory: auth2.0/backend
+        working-directory: backend
 
       - name: Frontend - Instalar dependencias
         run: npm install
-        working-directory: auth2.0/frontend
+        working-directory: frontend
 
       - name: Frontend - Ejecutar pruebas
         run: npm test -- --watchAll=false
-        working-directory: auth2.0/frontend
+        working-directory: frontend
 
       - name: Cypress E2E Tests
         run: npx cypress run
-        working-directory: auth2.0/frontend
+        working-directory: frontend

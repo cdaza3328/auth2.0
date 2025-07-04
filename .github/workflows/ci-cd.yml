@@ -10,6 +10,14 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    env:  # ✅ VARIABLES DISPONIBLES EN TODO EL JOB
+      NODE_ENV: test
+      MONGODB_URI: mongodb://localhost:27017/test-db
+      JWT_SECRET: fake-jwt
+      GOOGLE_CLIENT_ID: fake-client-id
+      GOOGLE_CLIENT_SECRET: fake-client-secret
+      SERVER_URL: http://localhost:8000
+
     services:
       mongo:
         image: mongo:5.0

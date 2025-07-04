@@ -27,25 +27,25 @@ jobs:
 
       - name: Backend - Install dependencies
         run: |
-          cd auth2.0/backend
+          cd backend
           npm install
 
       - name: Backend - Run tests
         run: |
-          cd auth2.0/backend
+          cd backend
           npm test
 
       - name: Frontend - Install dependencies
         run: |
-          cd auth2.0/frontend
+          cd frontend
           npm install
 
       - name: Frontend - Run tests
         run: |
-          cd auth2.0/frontend
+          cd frontend
           npm test -- --watchAll=false
 
       - name: Cypress E2E Tests
         run: |
           npx cypress run
-        working-directory: auth2.0/frontend
+        working-directory: frontend

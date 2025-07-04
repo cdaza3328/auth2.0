@@ -3,10 +3,9 @@ const passport = require("passport");
 const session = require("express-session");
 const cors = require("cors");
 require("dotenv").config();
-require("./auth/passport"); // asegúrate de que exista este archivo
-const connectDB = require("./database"); // asegúrate de que exista este archivo
+require("./auth/passport");
+const connectDB = require("./database");
 
-// Conexión a MongoDB
 connectDB();
 
 const app = express();
@@ -21,17 +20,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Rutas de autenticación
 app.use("/auth", require("./routes/auth"));
 
-// Ruta protegida
 app.get("/protected", require("./middleware/auth"), (req, res) => {
   res.json({ message: "Ruta protegida accedida correctamente" });
 });
 
-// Iniciar servidor
-app.listen(8000, () => {
-  console.log("✅ Backend corriendo en puerto 8000");
-});
+// Solo iniciar el servidor si NO estamos en modo test
+if (process.env.NODE_ENV !== "test") {
+  const PORT = process.env.PORT || 8000;
+  app.listen(PORT, () => {
+    console.log(`✅ Backend corriendo en puerto ${PORT}`);
+  });
+}
 
 module.exports = app;

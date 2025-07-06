@@ -80,7 +80,7 @@ auth2.0/
 - Ejecuta pruebas unitarias (Jest + React)
 - Ejecuta pruebas E2E con Cypress
 
-Ideal para integración continua con Vercel y Render.
+Ideal para integración continua con Vercel.
 
 ---
 
@@ -104,7 +104,6 @@ GOOGLE_CLIENT_SECRET=<tu-client-secret>
 - [ ] Crear cluster en MongoDB Atlas (producción)
 - [ ] Subir proyecto a GitHub
 - [ ] Conectar frontend a Vercel
-- [ ] Conectar backend a Render
 - [ ] Agregar control de roles si se requiere
 
 ---
